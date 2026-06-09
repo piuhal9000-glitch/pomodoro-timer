@@ -1726,17 +1726,23 @@
       els.settingsForm.addEventListener("submit", saveSettings);
 
       els.overlayRange.addEventListener("input", () => {
+        const overlay = validateNumber(els.overlayRange, 38, 10, 75);
+        state.settings.overlay = overlay;
         document.documentElement.style.setProperty(
           "--overlay",
-          Number(els.overlayRange.value) / 100
+          overlay / 100
         );
+        saveState();
       });
 
       els.glassBlurRange.addEventListener("input", () => {
+        const glassBlur = validateNumber(els.glassBlurRange, 18, 0, 40);
+        state.settings.glassBlur = glassBlur;
         document.documentElement.style.setProperty(
           "--glass-blur",
-          `${Number(els.glassBlurRange.value)}px`
+          `${glassBlur}px`
         );
+        saveState();
       });
 
       els.clearLogButton.addEventListener("click", clearLogs);
